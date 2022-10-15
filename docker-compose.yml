@@ -4,3 +4,6 @@ services:
   davadertrader:
     build: .
     container_name: davadertrader
+    volumes:
+      - .:/davadertrader
+    restart: "always"
