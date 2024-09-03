@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  davadertrader:
-    build: .
-    container_name: davadertrader
-    volumes:
-      - .:/davadertrader
