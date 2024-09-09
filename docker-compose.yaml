@@ -1,0 +1,17 @@
+---
+version: '3'
+
+services:
+  davadertrader:
+    build: .
+    container_name: davadertrader
+    environment:
+      - TELEGRAM_KEY=your-telegram-key-here
+    restart: always
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - xodelabs
+networks:
+  xodelabs:
+    driver: bridge

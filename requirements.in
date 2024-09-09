@@ -1,0 +1,9 @@
+requests
+mypy
+flake8
+black
+isort
+flynt
+types-requests
+coverage
+yamllint
