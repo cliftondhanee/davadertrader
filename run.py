@@ -34,7 +34,7 @@ def predict_next_value(current_value, percentage_change):
 
 def main():
     previous_value = None
-
+    buy_price = None
     while True:
         current_value = get_bitcoin_price()
 
@@ -48,11 +48,18 @@ def main():
                 msg = f"""
                 {percentage_change}% price drop detected.
 
-                Current Price: R{current_value}
+                Current price: R{current_value}
+		Previous price: R{previous_value}
                 Predicted price: R{predicted_value}
                 """
                 telegram_alert([485240048], msg)
+                buy_price = predicted_value
 
+        if buy_price:
+            if buy_price <= current_value:
+                msg = f"BTC bought at R{buy_price}"
+                telegram_alert([485240048], msg)
+                buy_price = None
         previous_value = current_value
         time.sleep(5)
 
