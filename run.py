@@ -5,7 +5,7 @@ import requests
 LUNO_API_URL = "https://api.luno.com/api/1/ticker?pair=XBTZAR"
 TELEGRAM_KEY = "bot524090948:AAEbfTvRyQeFHphouFF-JW_Mgnqwpek5s40"
 TELEGRAM_URL = f"https://api.telegram.org/{TELEGRAM_KEY}/sendMessage"
-
+PERCENTAGE_THRESHOLD = 1
 
 def telegram_alert(chat_ids, msg):
     for chat_id in chat_ids:
@@ -43,13 +43,13 @@ def main():
                 previous_value, current_value
             )
 
-            if percentage_change > 0.05:
+            if percentage_change >= PERCENTAGE_THRESHOLD:
                 predicted_value = predict_next_value(current_value, percentage_change)
                 msg = f"""
                 {percentage_change}% price drop detected.
 
-                \n\nCurrent Price: R{current_value}
-                \nPredicted price: R{predicted_value}
+                Current Price: R{current_value}
+                Predicted price: R{predicted_value}
                 """
                 telegram_alert([485240048], msg)
 
